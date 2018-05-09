@@ -10,14 +10,14 @@
 # Skill name: "Space Facts" by Amazon
 # Test scope: LaunchRequest, GetNewFactIntent, AMAZON.HelpIntent, AMAZON.StopIntent, AMAZON.CancelIntent
 #=====================================================================================================================
-
+---
 configuration:
   locale: en-US
 
 ---
 - test: "Sequence 01. Test scenario: launch request, no further interaction."
 - LaunchRequest:
-  - response.outputSpeech.ssml: "Here's your fact"
+  - response.outputSpeech.ssml == "Here's your fact"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
   - response.card.content: "*"
