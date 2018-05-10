@@ -2,6 +2,6 @@
   "handler": "lambda/custom/index.js",
   "locale": "en-US",
   "jest": {
-    "silent": false
+    "silent": true
   }
 }
