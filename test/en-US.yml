@@ -16,11 +16,11 @@ configuration:
 
 ---
 - test: "Sequence 01. Test scenario: launch request, no further interaction."
-- LaunchRequest:
+- LaunchRequest: # LaunchRequest is not an utterance but a request type and "reserved" word
   - response.outputSpeech.ssml: "Here's your fact"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
-  - response.card.content: "/.*/"
+  - response.card.content: "/.*/" # Regular expression indicating any text will match
 
 ---
 - test: "Sequence 02. Test scenario: GetNewFactIntent with different utterances."
@@ -41,48 +41,45 @@ configuration:
   - response.card.content: "/.*/"
 
 ---
-- test: "Sequence 03. Test scenario: AMAZON.HelpIntent"
-# Test scenario: AMAZON.HelpIntent:> Ask for help and exit.
-- "open space facts"
-- "help":
+- test: "Sequence 03. Test scenario: AMAZON.HelpIntent. Ask for help and exit."
+- "open space facts": # Empty expected part means we are not testing the response
+- "help": # This is what we want to test in this sequence
   - response.outputSpeech.ssml: "You can say tell me a space fact, or, you can say exit... What can I help you with?"
   - response.card: undefined
-  - response.reprompt.outputspeech.ssml: "What can I help you with?"
+  - response.reprompt.outputSpeech.ssml: "What can I help you with?"
 - "exit":
   - response.outputSpeech.ssml: "Goodbye!"
 
-# Test scenario: AMAZON.HelpIntent:> Ask for help and stop.
 ---
-- test: "Sequence 04. Test scenario: AMAZON.HelpIntent"
-- "open space facts"
+- test: "Sequence 04. Test scenario: AMAZON.HelpIntent. Ask for help and stop."
+- "open space facts":
 - "help":
   - response.outputSpeech.ssml: "You can say tell me a space fact, or, you can say exit... What can I help you with?"
   - response.card: undefined
-  - response.reprompt.outputspeech.ssml: "What can I help you with?"
+  - response.reprompt.outputSpeech.ssml: "What can I help you with?"
 - "stop":
   - response.outputSpeech.ssml: "Goodbye!"
 
-# Test scenario: AMAZON.HelpIntent:> Ask for help and then for a fact.
 ---
-- test: "Sequence 05. Test scenario: AMAZON.HelpIntent"
-- "open space facts"
+- test: "Sequence 05. Test scenario: AMAZON.HelpIntent. Ask for help and then for a fact."
+- "open space facts":
 - "help":
   - response.outputSpeech.ssml: "You can say tell me a space fact, or, you can say exit... What can I help you with?"
   - response.card: undefined
-  - response.reprompt.outputspeech.ssml: "What can I help you with?"
+  - response.reprompt.outputSpeech.ssml: "What can I help you with?"
 - "give me a fact":
   - response.outputSpeech.ssml: "/here's your fact.*/i"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
-  - response.card.content: "*"
+  - response.card.content: "/.*/"
 ---
 - test: "Sequence 06. Test scenario: AMAZON.StopIntent"
-- "open space facts"
+- "open space facts":
 - "stop":
   - response.outputSpeech.ssml: "Goodbye!"
 
 ---
 - test: "Sequence 07. Test scenario: AMAZON.CancelIntent"
-- "open space facts"
+- "open space facts":
 - "cancel":
   - response.outputSpeech.ssml: "Goodbye!"
