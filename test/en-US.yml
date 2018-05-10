@@ -17,28 +17,28 @@ configuration:
 ---
 - test: "Sequence 01. Test scenario: launch request, no further interaction."
 - LaunchRequest:
-  - response.outputSpeech.ssml == "Here's your fact"
+  - response.outputSpeech.ssml: "Here's your fact"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
-  - response.card.content: "*"
+  - response.card.content: "/.*/"
 
 ---
 - test: "Sequence 02. Test scenario: GetNewFactIntent with different utterances."
 - "ask space facts to tell me a space fact":
-  - response.outputSpeech.ssml: "here's your fact *"
+  - response.outputSpeech.ssml: "/here's your fact.*/i"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
-  - response.card.content: "*"
+  - response.card.content: "/.*/"
 - "tell space facts to give me fact":
-  - response.outputSpeech.ssml: "here's your fact *"
+  - response.outputSpeech.ssml: "/here's your fact.*/i"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
-  - response.card.content: "*"
+  - response.card.content: "/.*/"
 - "ask space facts to give me a space trivia":
-  - response.outputSpeech.ssml: "here's your fact *"
+  - response.outputSpeech.ssml: "/here's your fact.*/i"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
-  - response.card.content: "*"
+  - response.card.content: "/.*/"
 
 ---
 - test: "Sequence 03. Test scenario: AMAZON.HelpIntent"
@@ -71,7 +71,7 @@ configuration:
   - response.card: undefined
   - response.reprompt.outputspeech.ssml: "What can I help you with?"
 - "give me a fact":
-  - response.outputSpeech.ssml: "here's your fact *"
+  - response.outputSpeech.ssml: "/here's your fact.*/i"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
   - response.card.content: "*"
