@@ -8,7 +8,8 @@
 #
 # Test type: Functional/End-to-End/Regression
 # Skill name: "Space Facts" by Amazon
-# Test scope: LaunchRequest, GetNewFactIntent, AMAZON.HelpIntent, AMAZON.StopIntent, AMAZON.CancelIntent
+# Test scope: LaunchRequest, GetNewFactIntent, AMAZON.HelpIntent, AMAZON.StopIntent, AMAZON.CancelIntent,
+#             AMAZON.FallbackIntent
 #=====================================================================================================================
 ---
 configuration:
@@ -22,48 +23,56 @@ configuration:
   - response.card.title: "Space Facts"
   - response.card.content: "/.*/" # Regular expression indicating any text will match
 
+
+# Sequence 02. Test scenario: GetNewFactIntent with different utterances.
 ---
-- test: "Sequence 02. Test scenario: GetNewFactIntent with different utterances."
+- test: "Sequence 02-01. Test scenario: tell me."
 - "ask space facts to tell me a space fact":
   - response.outputSpeech.ssml: "/here's your fact.*/i"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
-  - response.card.content: "/.*/"
+  - response.card.content: "*"
+
+---
+- test: "Sequence 02-02. Test scenario: give me."
 - "tell space facts to give me fact":
   - response.outputSpeech.ssml: "/here's your fact.*/i"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
-  - response.card.content: "/.*/"
+  - response.card.content: "*"
+
+---
+- test: "Sequence 02-03. Test scenario: space trivia."
 - "ask space facts to give me a space trivia":
   - response.outputSpeech.ssml: "/here's your fact.*/i"
   - response.card.type: "Simple"
   - response.card.title: "Space Facts"
-  - response.card.content: "/.*/"
+  - response.card.content: "*"
 
 ---
 - test: "Sequence 03. Test scenario: AMAZON.HelpIntent. Ask for help and exit."
 - "open space facts": # Empty expected part means we are not testing the response
-- "help": # This is what we want to test in this sequence
+- help: # This is what we want to test in this sequence
   - response.outputSpeech.ssml: "You can say tell me a space fact, or, you can say exit... What can I help you with?"
   - response.card: undefined
   - response.reprompt.outputSpeech.ssml: "What can I help you with?"
-- "exit":
+- exit:
   - response.outputSpeech.ssml: "Goodbye!"
 
 ---
 - test: "Sequence 04. Test scenario: AMAZON.HelpIntent. Ask for help and stop."
 - "open space facts":
-- "help":
+- help:
   - response.outputSpeech.ssml: "You can say tell me a space fact, or, you can say exit... What can I help you with?"
   - response.card: undefined
   - response.reprompt.outputSpeech.ssml: "What can I help you with?"
-- "stop":
+- stop:
   - response.outputSpeech.ssml: "Goodbye!"
 
 ---
 - test: "Sequence 05. Test scenario: AMAZON.HelpIntent. Ask for help and then for a fact."
 - "open space facts":
-- "help":
+- help:
   - response.outputSpeech.ssml: "You can say tell me a space fact, or, you can say exit... What can I help you with?"
   - response.card: undefined
   - response.reprompt.outputSpeech.ssml: "What can I help you with?"
@@ -75,11 +84,20 @@ configuration:
 ---
 - test: "Sequence 06. Test scenario: AMAZON.StopIntent"
 - "open space facts":
-- "stop":
+- stop:
   - response.outputSpeech.ssml: "Goodbye!"
 
 ---
 - test: "Sequence 07. Test scenario: AMAZON.CancelIntent"
 - "open space facts":
-- "cancel":
+- cancel:
   - response.outputSpeech.ssml: "Goodbye!"
+
+---
+- test: "Sequence 08: AMAZON.FallbackIntent"
+- LaunchRequest:
+- AMAZON.FallbackIntent:
+  - intent: "AMAZON.FallbackIntent"
+  - prompt: "/The Space Facts skill can't help you with that.*/" # prompt is equivalent to response.outputSpeech.ssml
+  - reprompt: "What can I help you with?" # reprompt is equivalent to response.reprompt.outputSpeech.ssml
+  - response.shouldEndSession: "false"
