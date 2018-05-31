@@ -4,6 +4,7 @@
 #   To trigger the first build, you may need to create a new Pull Request on the branch with travis info
 # Then go to Codecov (https://codecov.io) and the code coverage information should already be there!
 #   Add the codecov.yml file to tailor codecov settings
+# To add badges, take a look at the README file attached to this project
 # That's it! - JPK
 language: node_js
 node_js:
