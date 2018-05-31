@@ -1,6 +1,9 @@
 # To enable travis and code coverage, copy this file to your project
 # Then go to Travis (https://travis-ci.org) and enable the repository
-# Then go to Codecov (https://codecov.io) and enable the repository there as well
+#   Click + on the top-left to view your available repositories
+#   To trigger the first build, you may need to create a new Pull Request on the branch with travis info
+# Then go to Codecov (https://codecov.io) and the code coverage information should already be there!
+#   Add the codecov.yml file to tailor codecov settings
 # That's it! - JPK
 language: node_js
 node_js:
