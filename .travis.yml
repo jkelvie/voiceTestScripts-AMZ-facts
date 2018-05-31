@@ -1,4 +1,5 @@
 # To enable travis and code coverage, copy this file to your project
+# Use the standard branch name of ContinuousIntegration
 # Then go to Travis (https://travis-ci.org) and enable the repository
 #   Click + on the top-left to view your available repositories
 #   To trigger the first build, you may need to create a new Pull Request on the branch with travis info
