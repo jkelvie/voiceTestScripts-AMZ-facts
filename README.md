@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/jkelvie/voiceTestScripts-AMZ-facts.svg?branch=ContinuousIntegration)](https://travis-ci.org/jkelvie/voiceTestScripts-AMZ-facts)[![codecov](https://codecov.io/gh/jkelvie/voiceTestScripts-AMZ-facts/branch/ContinuousIntegration/graph/badge.svg)](https://codecov.io/gh/jkelvie/voiceTestScripts-AMZ-facts)
+[![Build Status](https://travis-ci.org/jkelvie/voiceTestScripts-AMZ-facts.svg?branch=ContinuousIntegration)](https://travis-ci.org/jkelvie/voiceTestScripts-AMZ-facts)
+[![codecov](https://codecov.io/gh/jkelvie/voiceTestScripts-AMZ-facts/branch/ContinuousIntegration/graph/badge.svg)](https://codecov.io/gh/jkelvie/voiceTestScripts-AMZ-facts)
 # Build An Alexa Fact Skill
 <img src="https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/header._TTH_.png" />
 
