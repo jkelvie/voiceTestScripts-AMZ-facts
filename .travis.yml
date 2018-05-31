@@ -1,0 +1,17 @@
+# To enable travis and code coverage, copy this file to your project
+# Then go to Travis (https://travis-ci.org) and enable the repository
+# Then go to Codecov (https://codecov.io) and enable the repository there as well
+# That's it! - JPK
+language: node_js
+node_js:
+  - "8"
+install:
+  - npm install bespoken-tools@alpha -g
+  - npm install codecov -g
+  - cd lambda/custom && npm install && cd ../..
+script:
+ - bst test
+ - codecov
+cache:
+  directories:
+  - node_modules
