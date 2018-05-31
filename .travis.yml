@@ -8,7 +8,7 @@ node_js:
 install:
   - npm install bespoken-tools@alpha -g
   - npm install codecov -g
-  - cd lambda/custom && npm install
+  - cd lambda/custom && npm install && cd ../..
 script:
  - bst test
  - codecov
